@@ -3,8 +3,7 @@
 # - logstash (1.4)
 # - elasticsearch (1.0)
 # - kibana (3.0)
-#FROM qnib/fd20
-FROM fedora
+FROM qnib/fd20
 MAINTAINER "Christian Kniep <christian@qnib.org>"
 
 
