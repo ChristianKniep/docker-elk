@@ -10,7 +10,7 @@ MAINTAINER "Christian Kniep <christian@qnib.org>"
 
 ADD etc/yum.repos.d/logstash-1.4.repo /etc/yum.repos.d/logstash-1.4.repo
 ADD etc/yum.repos.d/elasticsearch-1.0.repo /etc/yum.repos.d/elasticsearch-1.0.repo
-RUN yum update -y
+RUN yum update -y -x systemd -x systemd-libs
 RUN yum install -y wget openssh-server
 RUN sshd-keygen
 
