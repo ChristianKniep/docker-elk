@@ -3,9 +3,9 @@
 # - logstash (1.4)
 # - elasticsearch (1.0)
 # - kibana (3.0)
-MAINTAINER "Christian Kniep <christian@qnib.org>"
 #FROM qnib/fd20
 FROM fedora
+MAINTAINER "Christian Kniep <christian@qnib.org>"
 
 
 ADD etc/yum.repos.d/logstash-1.4.repo /etc/yum.repos.d/logstash-1.4.repo
