@@ -1,7 +1,7 @@
-docker-lek
+docker-elk
 ==========
 
-Dockerfile creating LEK services (Logstash/Elasticsearch/Kibana)
+Dockerfile creating ELK services (Elasticsearch/Logstash/Kibana)
 
 It will
 
