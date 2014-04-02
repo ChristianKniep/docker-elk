@@ -22,10 +22,10 @@ It will
 I start the image as follows:
 
 ```
-export NAME=lek
+export NAME=elk
 docker run -d -h ${NAME} --name ${NAME} \
     --dns $(docker inspect -format '{{ .NetworkSettings.IPAddress }}' master) \
     --dns=$(cat /etc/resolv.conf |grep nameserver|head -n1|awk '{print $2}') \
     -p 9200:9200 -p 9300:9300 -p 8080:80 -p 5514:5514 \
-    qnib/docker-lek
+    qnib/elk
 ```
