@@ -30,10 +30,12 @@ WORKDIR /etc/nginx/conf.d
 RUN wget -q https://raw.githubusercontent.com/elasticsearch/kibana/master/sample/nginx.conf
 RUN sed -i -e 's/kibana.myhost.org;/localhost;/' nginx.conf
 RUN sed -i -e 's#/usr/share/kibana3#/opt/kibana-3.0.0/#' nginx.conf
-RUN #if ! grep "daemon off" nginx.conf ;then sed -i '/worker_processes.*/a daemon off;' nginx.conf;fi
+WORKDIR /etc/nginx/
+RUN if ! grep "daemon off" nginx.conf ;then sed -i '/worker_processes.*/a daemon off;' nginx.conf;fi
 ADD etc/supervisord.d/nginx.ini /etc/supervisord.d/nginx.ini
 
 # logstash
+RUN useradd jls
 RUN yum install -y logstash 
 ADD etc/logstash/conf.d/syslog.conf /etc/logstash/conf.d/syslog.conf
 ADD etc/supervisord.d/logstash.ini /etc/supervisord.d/logstash.ini
@@ -49,6 +51,19 @@ ADD etc/supervisord.d/elasticsearch.ini /etc/supervisord.d/elasticsearch.ini
 RUN yum install -y syslog-ng
 ADD etc/syslog-ng/syslog-ng.conf /etc/syslog-ng/syslog-ng.conf
 ADD etc/supervisord.d/syslog-ng.ini /etc/supervisord.d/
+
+# Diamond
+RUN yum install -y python-configobj lm_sensors
+ADD yum-cache /tmp/yum-cache
+RUN yum install -y /tmp/yum-cache/python-pysensors-*
+RUN rm -f /tmp/yum-cache/python-pysensors-*
+RUN yum install -y /tmp/yum-cache/python-diamond-*
+RUN rm -f /tmp/yum-cache/python-diamond-*
+RUN rm -rf /etc/diamond
+ADD etc/diamond /etc/diamond
+RUN mkdir -p /var/log/diamond
+ADD etc/supervisord.d/diamond.ini /etc/supervisord.d/diamond.ini
+
 
 EXPOSE 80
 EXPOSE 514
