@@ -3,7 +3,7 @@
 # - logstash (1.4)
 # - elasticsearch (1.0)
 # - kibana (3.0)
-FROM qnib/qnibterminal
+FROM qnib/terminal
 MAINTAINER "Christian Kniep <christian@qnib.org>"
 
 ADD etc/yum.repos.d/logstash-1.4.repo /etc/yum.repos.d/logstash-1.4.repo
@@ -24,6 +24,11 @@ RUN sed -i -e 's#/usr/share/kibana3#/opt/kibana-3.0.0/#' nginx.conf
 WORKDIR /etc/nginx/
 RUN if ! grep "daemon off" nginx.conf ;then sed -i '/worker_processes.*/a daemon off;' nginx.conf;fi
 ADD etc/supervisord.d/nginx.ini /etc/supervisord.d/nginx.ini
+
+# qnib-grok
+ADD yum-cache/grok /tmp/yum-cache/grok
+RUN yum install -y /tmp/yum-cache/grok/qnib-groks-1.0.0-20140426.1.noarch.rpm
+RUN rm -rf /tmp/yum-cache/grok
 
 # logstash
 RUN useradd jls
