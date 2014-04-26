@@ -3,17 +3,8 @@
 # - logstash (1.4)
 # - elasticsearch (1.0)
 # - kibana (3.0)
-FROM qnib/fd20
+FROM qnib/qnibterminal
 MAINTAINER "Christian Kniep <christian@qnib.org>"
-
-# setup 
-ADD root/bin /root/bin
-ADD etc/supervisord.d/setup.ini /etc/supervisord.d/setup.ini
-
-## supervisord
-RUN yum install -y supervisor 
-RUN mkdir -p /var/log/supervisor
-RUN sed -i -e 's/nodaemon=false/nodaemon=true/' /etc/supervisord.conf
 
 ADD etc/yum.repos.d/logstash-1.4.repo /etc/yum.repos.d/logstash-1.4.repo
 ADD etc/yum.repos.d/elasticsearch-1.0.repo /etc/yum.repos.d/elasticsearch-1.0.repo
@@ -47,29 +38,9 @@ RUN sed -i '/# cluster.name:.*/a cluster.name: logstash' /etc/elasticsearch/elas
 #RUN sed -i "/# node.name:.*/a node.name: $(hostname)" /etc/elasticsearch/elasticsearch.yml
 ADD etc/supervisord.d/elasticsearch.ini /etc/supervisord.d/elasticsearch.ini
 
-# syslog
-RUN yum install -y syslog-ng
-ADD etc/syslog-ng/syslog-ng.conf /etc/syslog-ng/syslog-ng.conf
-ADD etc/supervisord.d/syslog-ng.ini /etc/supervisord.d/
-
-# Diamond
-RUN yum install -y python-configobj lm_sensors
-ADD yum-cache /tmp/yum-cache
-RUN yum install -y /tmp/yum-cache/python-pysensors-*
-RUN rm -f /tmp/yum-cache/python-pysensors-*
-RUN yum install -y /tmp/yum-cache/python-diamond-*
-RUN rm -f /tmp/yum-cache/python-diamond-*
-RUN rm -rf /etc/diamond
-ADD etc/diamond /etc/diamond
-RUN mkdir -p /var/log/diamond
-ADD etc/supervisord.d/diamond.ini /etc/supervisord.d/diamond.ini
-
-
 EXPOSE 80
 EXPOSE 514
 EXPOSE 9200
 EXPOSE 9300
 
-
-ADD etc/supervisord.d /etc/
 CMD /bin/supervisord -c /etc/supervisord.conf
