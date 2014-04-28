@@ -32,7 +32,7 @@ RUN rm -rf /tmp/yum-cache/grok
 
 # logstash
 RUN useradd jls
-RUN yum install -y logstash 
+RUN yum install -y logstash
 ADD etc/logstash/conf.d/syslog.conf /etc/logstash/conf.d/syslog.conf
 ADD etc/supervisord.d/logstash.ini /etc/supervisord.d/logstash.ini
 
@@ -42,10 +42,5 @@ RUN sed -i '/# cluster.name:.*/a cluster.name: logstash' /etc/elasticsearch/elas
 ## Makes no sense to be done while building
 #RUN sed -i "/# node.name:.*/a node.name: $(hostname)" /etc/elasticsearch/elasticsearch.yml
 ADD etc/supervisord.d/elasticsearch.ini /etc/supervisord.d/elasticsearch.ini
-
-EXPOSE 80
-EXPOSE 514
-EXPOSE 9200
-EXPOSE 9300
 
 CMD /bin/supervisord -c /etc/supervisord.conf
