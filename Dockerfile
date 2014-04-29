@@ -43,9 +43,4 @@ RUN sed -i '/# cluster.name:.*/a cluster.name: logstash' /etc/elasticsearch/elas
 #RUN sed -i "/# node.name:.*/a node.name: $(hostname)" /etc/elasticsearch/elasticsearch.yml
 ADD etc/supervisord.d/elasticsearch.ini /etc/supervisord.d/elasticsearch.ini
 
-EXPOSE 80
-EXPOSE 514
-EXPOSE 9200
-EXPOSE 9300
-
 CMD /bin/supervisord -c /etc/supervisord.conf
