@@ -32,7 +32,7 @@ RUN rm -rf /tmp/yum-cache/grok
 
 # logstash
 RUN useradd jls
-RUN yum install -y logstash 
+RUN yum install -y logstash
 ADD etc/logstash/conf.d/syslog.conf /etc/logstash/conf.d/syslog.conf
 ADD etc/supervisord.d/logstash.ini /etc/supervisord.d/logstash.ini
 
