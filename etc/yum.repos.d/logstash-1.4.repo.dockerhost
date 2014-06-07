@@ -1,0 +1,6 @@
+[logstash-1.4]
+name=logstash repository for 1.4.x packages
+baseurl=http://172.17.42.1:81/repo/logstash/1.4
+gpgcheck=1
+gpgkey=http://packages.elasticsearch.org/GPG-KEY-elasticsearch
+enabled=1
