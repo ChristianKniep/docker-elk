@@ -15,14 +15,13 @@ RUN sshd-keygen
 ## kibana && nginx
 RUN yum install -y nginx
 WORKDIR /opt/
-RUN wget -q https://download.elasticsearch.org/kibana/kibana/kibana-3.0.0.tar.gz
-RUN tar xf kibana-3.0.0.tar.gz
+ADD kibana-3.1.0.tar.gz /opt/
 WORKDIR /etc/nginx/conf.d
-RUN wget -q https://raw.githubusercontent.com/elasticsearch/kibana/master/sample/nginx.conf
+ADD etc/nginx.conf /etc/nginx/conf.d/nginx.conf
 RUN sed -i -e 's/kibana.myhost.org;/localhost;/' nginx.conf
 RUN sed -i -e 's#/usr/share/kibana3#/var/www/#' nginx.conf
 RUN mkdir -p /var/www
-RUN ln -s /opt/kibana-3.0.0 /var/www/kibana
+RUN ln -s /opt/kibana-3.1.0 /var/www/kibana
 WORKDIR /etc/nginx/
 RUN if ! grep "daemon off" nginx.conf ;then sed -i '/worker_processes.*/a daemon off;' nginx.conf;fi
 ADD etc/supervisord.d/nginx.ini /etc/supervisord.d/nginx.ini
@@ -48,9 +47,9 @@ ADD etc/supervisord.d/elasticsearch.ini /etc/supervisord.d/elasticsearch.ini
 
 ##### Provide tools to do stuff
 # grok testing
-RUN yum install -y python-docopt python-simplejson python-envoy rubygems
+#RUN yum install -y python-docopt python-simplejson python-envoy rubygems
 ### WORKAROUND
-RUN yum install -y ruby-devel make gcc
-RUN gem install jls-grok
+#RUN yum install -y ruby-devel make gcc
+#RUN gem install jls-grok
 
 CMD /bin/supervisord -c /etc/supervisord.conf
