@@ -25,6 +25,7 @@ RUN ln -s /opt/kibana-3.1.0 /var/www/kibana
 WORKDIR /etc/nginx/
 RUN if ! grep "daemon off" nginx.conf ;then sed -i '/worker_processes.*/a daemon off;' nginx.conf;fi
 ADD etc/supervisord.d/nginx.ini /etc/supervisord.d/nginx.ini
+ADD opt/kibana-3.1.0/app/dashboards/default.json /opt/kibana-3.1.0/app/dashboards/default.json
 
 # qnib-grok
 ADD yum-cache/grok /tmp/yum-cache/grok
