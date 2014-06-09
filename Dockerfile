@@ -3,7 +3,7 @@
 # - logstash (1.4)
 # - elasticsearch (1.0)
 # - kibana (3.0)
-FROM qnib-terminal
+FROM qnib/terminal
 MAINTAINER "Christian Kniep <christian@qnib.org>"
 
 ADD etc/yum.repos.d/logstash-1.4.repo /etc/yum.repos.d/logstash-1.4.repo
