@@ -30,7 +30,6 @@ ADD opt/kibana-3.1.0/app/dashboards/default.json /opt/kibana-3.1.0/app/dashboard
 # qnib-grok
 ADD yum-cache/grok /tmp/yum-cache/grok
 RUN yum install -y /tmp/yum-cache/grok/qnib-groks-1.0.0-20140426.1.noarch.rpm
-RUN yum install -y /tmp/yum-cache/grok/python-envoy-0.0.2-1.noarch.rpm
 RUN rm -rf /tmp/yum-cache/grok
 
 # logstash
