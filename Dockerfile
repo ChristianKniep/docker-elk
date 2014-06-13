@@ -9,8 +9,7 @@ MAINTAINER "Christian Kniep <christian@qnib.org>"
 ADD etc/yum.repos.d/logstash-1.4.repo /etc/yum.repos.d/logstash-1.4.repo
 ADD etc/yum.repos.d/elasticsearch-1.2.repo /etc/yum.repos.d/elasticsearch-1.2.repo
 # which is needed by bin/logstash :)
-RUN yum install -y openssh-server which
-RUN sshd-keygen
+RUN yum install -y which
 
 ## kibana && nginx
 RUN yum install -y nginx
@@ -44,20 +43,6 @@ RUN sed -i '/# cluster.name:.*/a cluster.name: logstash' /etc/elasticsearch/elas
 ## Makes no sense to be done while building
 #RUN sed -i "/# node.name:.*/a node.name: $(hostname)" /etc/elasticsearch/elasticsearch.yml
 ADD etc/supervisord.d/elasticsearch.ini /etc/supervisord.d/elasticsearch.ini
-
-##### USER
-# Set (very simple) password for root
-RUN echo "root:root"|chpasswd
-ADD root/ssh /root/.ssh
-RUN chmod 600 /root/.ssh/authorized_keys
-RUN chown -R root:root /root/*
-
-### SSHD
-RUN yum install -y openssh-server
-RUN mkdir -p /var/run/sshd
-RUN sshd-keygen
-RUN sed -i -e 's/#UseDNS yes/UseDNS no/' /etc/ssh/sshd_config
-ADD etc/supervisord.d/sshd.ini /etc/supervisord.d/sshd.ini
 
 ##### Provide tools to do stuff
 # grok testing
