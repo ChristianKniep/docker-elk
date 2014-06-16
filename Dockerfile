@@ -6,8 +6,10 @@
 FROM qnib/terminal
 MAINTAINER "Christian Kniep <christian@qnib.org>"
 
-ADD etc/yum.repos.d/logstash-1.4.repo /etc/yum.repos.d/logstash-1.4.repo
-ADD etc/yum.repos.d/elasticsearch-1.2.repo /etc/yum.repos.d/elasticsearch-1.2.repo
+ADD etc/yum.repos.d/logstash-1.4.repo /etc/yum.repos.d/
+ADD etc/yum.repos.d/elasticsearch-1.2.repo /etc/yum.repos.d/
+ADD etc/yum.repos.d/local_logstash-1.4.repo /etc/yum.repos.d/
+ADD etc/yum.repos.d/local_elasticsearch-1.2.repo /etc/yum.repos.d/
 # which is needed by bin/logstash :)
 RUN yum install -y which
 
