@@ -32,66 +32,26 @@
         "1": {
           "type": "field",
           "field": "program",
-          "query": "\"carbon-cache\"",
-          "mandate": "mustNot",
+          "query": "\"slurmctld\"",
+          "mandate": "either",
           "active": true,
           "alias": "",
           "id": 1
         },
         "2": {
           "type": "field",
-          "field": "facility_label",
-          "query": "\"kernel\"",
-          "mandate": "mustNot",
+          "field": "program",
+          "query": "\"slurmd\"",
+          "mandate": "either",
           "active": true,
           "alias": "",
           "id": 2
-        },
-        "3": {
-          "type": "field",
-          "field": "facility_label",
-          "query": "\"syslogd\"",
-          "mandate": "mustNot",
-          "active": true,
-          "alias": "",
-          "id": 3
-        },
-        "4": {
-          "type": "field",
-          "field": "_type",
-          "query": "\"nginx\"",
-          "mandate": "mustNot",
-          "active": true,
-          "alias": "",
-          "id": 4
-        },
-        "5": {
-          "type": "field",
-          "field": "program",
-          "query": "\"slurmd\"",
-          "mandate": "mustNot",
-          "active": true,
-          "alias": "",
-          "id": 5
-        },
-        "6": {
-          "type": "field",
-          "field": "program",
-          "query": "\"slurmctld\"",
-          "mandate": "mustNot",
-          "active": true,
-          "alias": "",
-          "id": 6
         }
       },
       "ids": [
         0,
         1,
-        2,
-        3,
-        4,
-        5,
-        6
+        2
       ]
     }
   },
@@ -100,7 +60,7 @@
       "title": "Dashboards",
       "height": "150px",
       "editable": true,
-      "collapse": false,
+      "collapse": true,
       "collapsable": true,
       "panels": [
         {
@@ -110,7 +70,7 @@
           "type": "text",
           "loadingEditor": false,
           "mode": "markdown",
-          "content": "Besides this 'default' dashboards there are several others (expanded as needed):\n\n- [slurm*](/kibana/#/dashboard/file/slurm.json) Which filters slurmd|slurmctld\n- [ERROR](/kibana/#/dashboard/file/error.json) Filters errors (like OutOfMemory)",
+          "content": "Besides this 'default' dashboards there are several others (expanded as needed):\n\n- [slurm*](/dashboard/file/slurm.json) Which filters slurmd|slurmctld",
           "style": {},
           "title": "Dashboards"
         }
@@ -282,7 +242,7 @@
     {
       "type": "filtering",
       "collapse": true,
-      "notice": true,
+      "notice": false,
       "enable": true
     }
   ],
