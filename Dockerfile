@@ -6,8 +6,8 @@
 FROM qnib/terminal
 MAINTAINER "Christian Kniep <christian@qnib.org>"
 
-ADD etc/yum.repos.d/logstash-1.4.repo /etc/yum.repos.d/
-ADD etc/yum.repos.d/elasticsearch-1.2.repo /etc/yum.repos.d/
+#ADD etc/yum.repos.d/logstash-1.4.repo /etc/yum.repos.d/
+#ADD etc/yum.repos.d/elasticsearch-1.2.repo /etc/yum.repos.d/
 ADD etc/yum.repos.d/local_logstash-1.4.repo /etc/yum.repos.d/
 ADD etc/yum.repos.d/local_elasticsearch-1.2.repo /etc/yum.repos.d/
 # which is needed by bin/logstash :)
@@ -26,7 +26,6 @@ RUN ln -s /opt/kibana-3.1.0 /var/www/kibana
 WORKDIR /etc/nginx/
 RUN if ! grep "daemon off" nginx.conf ;then sed -i '/worker_processes.*/a daemon off;' nginx.conf;fi
 ADD etc/supervisord.d/nginx.ini /etc/supervisord.d/nginx.ini
-ADD opt/kibana-3.1.0/app/dashboards/default.json /opt/kibana-3.1.0/app/dashboards/default.json
 
 # qnib-grok
 ADD yum-cache/grok /tmp/yum-cache/grok
@@ -53,4 +52,11 @@ ADD etc/supervisord.d/elasticsearch.ini /etc/supervisord.d/elasticsearch.ini
 #RUN yum install -y ruby-devel make gcc
 #RUN gem install jls-grok
 
+# Config kibana-Dashboards
+ADD opt/kibana-3.1.0/app/dashboards/default.json /opt/kibana-3.1.0/app/dashboards/
+ADD opt/kibana-3.1.0/app/dashboards/slurm.json /opt/kibana-3.1.0/app/dashboards/
+ADD opt/kibana-3.1.0/app/dashboards/error.json /opt/kibana-3.1.0/app/dashboards/
+
+## TODO: grok-patterns updaten
+ADD etc/grok/patterns/slurm /etc/grok/patterns/slurm
 CMD /bin/supervisord -c /etc/supervisord.conf
