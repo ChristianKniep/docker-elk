@@ -11,7 +11,8 @@ MAINTAINER "Christian Kniep <christian@qnib.org>"
 ADD etc/yum.repos.d/local_logstash-1.4.repo /etc/yum.repos.d/
 ADD etc/yum.repos.d/local_elasticsearch-1.2.repo /etc/yum.repos.d/
 # which is needed by bin/logstash :)
-RUN yum install -y which
+RUN yum install -y which zeromq
+RUN ln -s /usr/lib64/libzmq.so.1 /usr/lib64/libzmq.so
 
 ## kibana && nginx
 RUN yum install -y nginx
@@ -35,7 +36,7 @@ RUN rm -rf /tmp/yum-cache/grok
 # logstash
 RUN useradd jls
 RUN yum install -y logstash
-ADD etc/logstash/conf.d/syslog.conf /etc/logstash/conf.d/syslog.conf
+ADD etc/logstash/conf.d/syslog.conf /etc/logstash/conf.d/
 ADD etc/supervisord.d/logstash.ini /etc/supervisord.d/logstash.ini
 
 # elasticsearch
