@@ -1,5 +1,5 @@
-[logstash-1.4]
-name=logstash repository for 1.4.x packages
+[local_logstash-1.4]
+name=Local logstash repository for 1.4.x packages
 baseurl=http://172.17.42.1:81/repo/logstash/1.4
 skip_if_unavailable=true
 priority=1

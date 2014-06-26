@@ -1,5 +1,5 @@
-[elasticsearch-1.2]
-name=Elasticsearch repository for 1.2.x packages
+[local_elasticsearch-1.2]
+name=Local elasticsearch repository for 1.2.x packages
 baseurl=http://172.17.42.1:81/repo/elasticsearch/1.2
 skip_if_unavailable=true
 priority=1
