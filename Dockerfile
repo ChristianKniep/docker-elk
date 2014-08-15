@@ -3,6 +3,7 @@
 # - logstash (1.4)
 # - elasticsearch (1.0)
 # - kibana (3.0)
+# - StatsD (to fetch stuff from logstash)
 FROM qnib/terminal
 MAINTAINER "Christian Kniep <christian@qnib.org>"
 
@@ -28,16 +29,9 @@ WORKDIR /etc/nginx/
 RUN if ! grep "daemon off" nginx.conf ;then sed -i '/worker_processes.*/a daemon off;' nginx.conf;fi
 ADD etc/supervisord.d/nginx.ini /etc/supervisord.d/nginx.ini
 
-# qnib-grok
-ADD yum-cache/grok /tmp/yum-cache/grok
-RUN yum install -y /tmp/yum-cache/grok/qnib-groks-1.0.0-20140426.1.noarch.rpm
-RUN rm -rf /tmp/yum-cache/grok
-
 # logstash
 RUN useradd jls
 RUN yum install -y logstash
-ADD etc/logstash/conf.d/syslog.conf /etc/logstash/conf.d/
-ADD etc/supervisord.d/logstash.ini /etc/supervisord.d/logstash.ini
 
 # elasticsearch
 RUN yum install -y elasticsearch
@@ -46,18 +40,19 @@ RUN sed -i '/# cluster.name:.*/a cluster.name: logstash' /etc/elasticsearch/elas
 #RUN sed -i "/# node.name:.*/a node.name: $(hostname)" /etc/elasticsearch/elasticsearch.yml
 ADD etc/supervisord.d/elasticsearch.ini /etc/supervisord.d/elasticsearch.ini
 
-##### Provide tools to do stuff
-# grok testing
-#RUN yum install -y python-docopt python-simplejson python-envoy rubygems
-### WORKAROUND
-#RUN yum install -y ruby-devel make gcc
-#RUN gem install jls-grok
+# Add QNIBInc repo
+ADD etc/yum.repos.d/qnib.repo /etc/yum.repos.d/
+RUN echo "20140815.1"; yum clean all
+# statsd
+RUN yum install -y qnib-statsd
+# qnib-grok
+RUN echo "20140815"; yum clean all; yum install -y qnib-grok-patterns
+# logstash-conf
+RUN yum install -y qnib-logstash-conf
 
 # Config kibana-Dashboards
-ADD opt/kibana-3.1.0/app/dashboards/default.json /opt/kibana-3.1.0/app/dashboards/
-ADD opt/kibana-3.1.0/app/dashboards/slurm.json /opt/kibana-3.1.0/app/dashboards/
-ADD opt/kibana-3.1.0/app/dashboards/error.json /opt/kibana-3.1.0/app/dashboards/
+ADD opt/kibana-3.1.0/app/dashboards/ /opt/kibana-3.1.0/app/dashboards/
 
-## TODO: grok-patterns updaten
-ADD etc/grok/patterns/slurm /etc/grok/patterns/slurm
+EXPOSE 5514
+
 CMD /bin/supervisord -c /etc/supervisord.conf
