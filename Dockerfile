@@ -32,6 +32,7 @@ ADD etc/supervisord.d/nginx.ini /etc/supervisord.d/nginx.ini
 # logstash
 RUN useradd jls
 RUN yum install -y logstash
+ADD etc/supervisord.d/logstash.ini /etc/supervisord.d/
 
 # elasticsearch
 RUN yum install -y elasticsearch
@@ -46,7 +47,7 @@ RUN echo "20140815.1"; yum clean all
 # statsd
 RUN yum install -y qnib-statsd
 # qnib-grok
-RUN echo "20140815"; yum clean all; yum install -y qnib-grok-patterns
+RUN yum install -y qnib-grok-patterns
 # logstash-conf
 RUN yum install -y qnib-logstash-conf
 
