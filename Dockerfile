@@ -42,7 +42,6 @@ RUN sed -i '/# cluster.name:.*/a cluster.name: logstash' /etc/elasticsearch/elas
 ADD etc/supervisord.d/elasticsearch.ini /etc/supervisord.d/elasticsearch.ini
 
 # Add QNIBInc repo
-ADD etc/yum.repos.d/qnib.repo /etc/yum.repos.d/
 RUN echo "20140815.1"; yum clean all
 # statsd
 RUN yum install -y qnib-statsd

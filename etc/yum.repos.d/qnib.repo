@@ -1,6 +1,0 @@
-[qnib]
-name=QNIBInc Repository
-failovermethod=priority
-baseurl=http://repo.qnib.org/rhel/
-enabled=1
-gpgcheck=0
