@@ -20,7 +20,7 @@ RUN yum install -y nginx
 WORKDIR /opt/
 ADD kibana-3.1.0.tar.gz /opt/
 WORKDIR /etc/nginx/conf.d
-ADD etc/nginx.conf /etc/nginx/conf.d/nginx.conf
+ADD etc/nginx/conf.d/kibana.conf /etc/nginx/conf.d/kibana.conf
 RUN sed -i -e 's/kibana.myhost.org;/localhost;/' nginx.conf
 RUN sed -i -e 's#/usr/share/kibana3#/var/www/#' nginx.conf
 RUN mkdir -p /var/www

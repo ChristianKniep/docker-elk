@@ -22,7 +22,7 @@
         "0": {
           "type": "time",
           "field": "@timestamp",
-          "from": "now-15m",
+          "from": "now-5m",
           "to": "now",
           "mandate": "must",
           "active": true,
@@ -105,7 +105,7 @@
       "panels": [
         {
           "error": false,
-          "span": 12,
+          "span": 4,
           "editable": true,
           "type": "text",
           "loadingEditor": false,
@@ -113,51 +113,42 @@
           "content": "Besides this 'default' dashboards there are several others (expanded as needed):\n\n- [slurm*](/kibana/#/dashboard/file/slurm.json) Which filters slurmd|slurmctld\n- [ERROR](/kibana/#/dashboard/file/error.json) Filters errors (like OutOfMemory)",
           "style": {},
           "title": "Dashboards"
-        }
-      ],
-      "notice": false
-    },
-    {
-      "title": "Graph",
-      "height": "150px",
-      "editable": true,
-      "collapse": false,
-      "collapsable": true,
-      "panels": [
+        },
         {
-          "span": 12,
+          "span": 8,
           "editable": true,
-          "group": [
-            "default"
-          ],
           "type": "histogram",
+          "loadingEditor": false,
           "mode": "count",
           "time_field": "@timestamp",
           "value_field": null,
-          "auto_int": true,
-          "resolution": 100,
-          "interval": "10s",
-          "fill": 3,
-          "linewidth": 3,
-          "timezone": "browser",
-          "spyable": true,
-          "zoomlinks": true,
-          "bars": true,
-          "stack": true,
-          "points": false,
-          "lines": false,
-          "legend": true,
           "x-axis": true,
           "y-axis": true,
-          "percentage": false,
-          "interactive": true,
+          "scale": 1,
+          "y_format": "none",
+          "grid": {
+            "max": null,
+            "min": 0
+          },
           "queries": {
             "mode": "all",
             "ids": [
               0
             ]
           },
-          "title": "Events over time",
+          "annotate": {
+            "enable": false,
+            "query": "*",
+            "size": 20,
+            "field": "_type",
+            "sort": [
+              "_score",
+              "desc"
+            ]
+          },
+          "auto_int": true,
+          "resolution": 100,
+          "interval": "1s",
           "intervals": [
             "auto",
             "1s",
@@ -170,35 +161,31 @@
             "12h",
             "1d",
             "1w",
-            "1M",
             "1y"
           ],
+          "lines": false,
+          "fill": 0,
+          "linewidth": 3,
+          "points": false,
+          "pointradius": 5,
+          "bars": true,
+          "stack": true,
+          "spyable": true,
+          "zoomlinks": true,
           "options": true,
+          "legend": true,
+          "show_query": true,
+          "interactive": true,
+          "legend_counts": true,
+          "timezone": "browser",
+          "percentage": false,
+          "zerofill": true,
+          "derivative": false,
           "tooltip": {
             "value_type": "cumulative",
             "query_as_alias": true
           },
-          "scale": 1,
-          "y_format": "none",
-          "grid": {
-            "max": null,
-            "min": 0
-          },
-          "annotate": {
-            "enable": false,
-            "query": "*",
-            "size": 20,
-            "field": "_type",
-            "sort": [
-              "_score",
-              "desc"
-            ]
-          },
-          "pointradius": 5,
-          "show_query": true,
-          "legend_counts": true,
-          "zerofill": true,
-          "derivative": false
+          "title": "Log Events"
         }
       ],
       "notice": false
