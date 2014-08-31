@@ -21,8 +21,8 @@ WORKDIR /opt/
 ADD kibana-3.1.0.tar.gz /opt/
 WORKDIR /etc/nginx/conf.d
 ADD etc/nginx/conf.d/kibana.conf /etc/nginx/conf.d/kibana.conf
-RUN sed -i -e 's/kibana.myhost.org;/localhost;/' nginx.conf
-RUN sed -i -e 's#/usr/share/kibana3#/var/www/#' nginx.conf
+RUN sed -i -e 's/kibana.myhost.org;/localhost;/' kibana.conf
+RUN sed -i -e 's#/usr/share/kibana3#/var/www/#' kibana.conf
 RUN mkdir -p /var/www
 RUN ln -s /opt/kibana-3.1.0 /var/www/kibana
 WORKDIR /etc/nginx/
