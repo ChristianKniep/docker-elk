@@ -37,13 +37,20 @@ export ES_PERSIST="-v ${HOME}/elasticsearch:/var/lib/elasticsearch"
 export LS_CONF="-v ${HOME}/logstash.d/:/etc/logstash/conf.d/"
 ### OPTIONAL -> map apache2 config into container
 export AP_LOG="-v ${HOME}/var/log/apache2/:/var/log/apache2"
+### OPTIONAL -> set the external port to something else then 80
+export HTTP_PORT="-e HTTPPORT=8080 -p 8080:80"
+### OPTIONAL -> To secure kibana and elasticsearch user/passwd could be set
+# if a user is set and no passwd, the user will be set as password
+export HTUSER=kibana
+export HTPASSWD=secretpw
 ```
 ### Run container interactivly
 ```
 docker run -t -i --rm -h elk --name elk --privileged \
     ${DNS_STUFF} ${DEV_MOUNTS} ${LINK} \
-    -e HTTPPORT=8080 ${LS_CONF} ${AP_LOG} \
-    ${ES_PERSIST} -p 8080:80 -p 5514:5514 qnib/elk:latest bash
+    ${HTTP_PORT} ${LS_CONF} ${AP_LOG} \
+    -e HTUSER=${HTUSER} -e HTPASSWD=${HTPASSWD} \
+    ${ES_PERSIST} qnib/elk:latest bash
 bash-4.2# supervisor_daemonize.sh
 # supervisorctl status
 diamond                          RUNNING   pid 21, uptime 0:00:04
@@ -61,8 +68,9 @@ syslog-ng                        STOPPED   Not started
 ```
 docker run -d-h elk --name elk --privileged \
     ${DNS_STUFF} ${DEV_MOUNTS} ${LINK} \
-    -e HTTPPORT=8080 ${LS_CONF} ${AP_LOG} \
-    ${ES_PERSIST} -p 8080:80 -p 5514:5514 qnib/elk:latest 
+    ${HTTP_PORT} ${LS_CONF} ${AP_LOG} \
+    -e HTUSER=${HTUSER} -e HTPASSWD=${HTPASSWD} \
+    ${ES_PERSIST} qnib/elk:latest 
 ```
 
 ## Feed the beast

@@ -25,6 +25,7 @@ if [ $(find /etc/logstash/conf.d/ -name \*.conf|wc -l) -eq 0 ];then
 fi
 
 ## Start logstash watchdog
+rm -f /etc/logstash/conf.d/remove_to_restart_logstash
 watch_lock
 
 
