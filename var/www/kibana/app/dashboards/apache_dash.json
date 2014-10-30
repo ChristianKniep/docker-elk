@@ -22,7 +22,7 @@
         "0": {
           "type": "time",
           "field": "@timestamp",
-          "from": "now-5m",
+          "from": "now-6h",
           "to": "now",
           "mandate": "must",
           "active": true,
@@ -31,8 +31,8 @@
         },
         "1": {
           "type": "field",
-          "field": "program",
-          "query": "\"carbon-cache\"",
+          "field": "referrer",
+          "query": "\"\\\"http://qnib.org/qnibterminal/2014/.*\"",
           "mandate": "mustNot",
           "active": true,
           "alias": "",
@@ -40,8 +40,8 @@
         },
         "2": {
           "type": "field",
-          "field": "facility_label",
-          "query": "\"kernel\"",
+          "field": "request",
+          "query": "\"/feed.xml\"",
           "mandate": "mustNot",
           "active": true,
           "alias": "",
@@ -49,8 +49,8 @@
         },
         "3": {
           "type": "field",
-          "field": "facility_label",
-          "query": "\"syslogd\"",
+          "field": "request",
+          "query": "\"/favicon.ico\"",
           "mandate": "mustNot",
           "active": true,
           "alias": "",
@@ -58,8 +58,8 @@
         },
         "4": {
           "type": "field",
-          "field": "_type",
-          "query": "\"nginx\"",
+          "field": "request",
+          "query": "\"/pics/.*\"",
           "mandate": "mustNot",
           "active": true,
           "alias": "",
@@ -67,8 +67,8 @@
         },
         "5": {
           "type": "field",
-          "field": "program",
-          "query": "\"slurmd\"",
+          "field": "request",
+          "query": "\"/css/.*\"",
           "mandate": "mustNot",
           "active": true,
           "alias": "",
@@ -76,21 +76,30 @@
         },
         "6": {
           "type": "field",
-          "field": "program",
-          "query": "\"slurmctld\"",
+          "field": "referrer",
+          "query": "\"\\\"http://www.qnib.org/.*\\\"\"",
           "mandate": "mustNot",
           "active": true,
           "alias": "",
           "id": 6
         },
-        "7": {
+        "8": {
           "type": "field",
-          "field": "tags",
-          "query": "\"syslog_out\"",
+          "field": "request",
+          "query": "\"/data/.*\"",
+          "mandate": "mustNot",
+          "active": true,
+          "alias": "",
+          "id": 8
+        },
+        "10": {
+          "type": "field",
+          "field": "path",
+          "query": "\"/var/log/apache2/qniborg_access.log\"",
           "mandate": "must",
           "active": true,
           "alias": "",
-          "id": 7
+          "id": 10
         }
       },
       "ids": [
@@ -101,7 +110,8 @@
         4,
         5,
         6,
-        7
+        8,
+        10
       ]
     }
   },
@@ -114,7 +124,7 @@
       "collapsable": true,
       "panels": [
         {
-          "span": 6,
+          "span": 5,
           "editable": true,
           "type": "histogram",
           "loadingEditor": false,
@@ -147,7 +157,7 @@
           },
           "auto_int": true,
           "resolution": 100,
-          "interval": "1s",
+          "interval": "5m",
           "intervals": [
             "auto",
             "1s",
@@ -192,12 +202,12 @@
           "editable": true,
           "type": "map",
           "loadingEditor": false,
-          "map": "europe",
+          "map": "world",
           "colors": [
             "#A0E2E2",
             "#265656"
           ],
-          "size": 100,
+          "size": 200,
           "exclude": [],
           "spyable": true,
           "queries": {
@@ -206,7 +216,31 @@
               0
             ]
           },
-          "title": "Lokations"
+          "title": "Visitors",
+          "field": "geoip.country_code2"
+        },
+        {
+          "error": false,
+          "span": 3,
+          "editable": true,
+          "type": "map",
+          "loadingEditor": false,
+          "map": "europe",
+          "colors": [
+            "#A0E2E2",
+            "#265656"
+          ],
+          "size": 200,
+          "exclude": [],
+          "spyable": true,
+          "queries": {
+            "mode": "all",
+            "ids": [
+              0
+            ]
+          },
+          "title": "Visitors",
+          "field": "geoip.country_code2"
         }
       ],
       "notice": false
@@ -240,8 +274,10 @@
           "overflow": "min-height",
           "fields": [
             "@timestamp",
-            "host",
-            "message"
+            "clientip",
+            "geoip.city_name",
+            "request",
+            "referrer"
           ],
           "localTime": true,
           "timeField": "@timestamp",
@@ -290,7 +326,7 @@
     {
       "type": "filtering",
       "collapse": true,
-      "notice": false,
+      "notice": true,
       "enable": true
     }
   ],
