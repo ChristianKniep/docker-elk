@@ -67,4 +67,10 @@ EXPOSE 80
 
 ADD etc/supervisord.d/setup.ini /etc/supervisord.d/
 
-CMD /bin/supervisord -c /etc/supervisord.conf
+ADD etc/consul.d/check_elasticsearch.json /etc/consul.d/check_elasticsearch.json
+ADD etc/nginx/nginx.conf /etc/nginx/nginx.conf
+ADD etc/syslog-ng/conf.d/logstash.conf /etc/syslog-ng/conf.d/logstash.conf
+# Should move to terminal
+ADD etc/diamond/handlers/InfluxdbHandler.conf /etc/diamond/handlers/InfluxdbHandler.conf
+ADD opt/qnib/bin/start_diamond.sh /opt/qnib/bin/start_diamond.sh
+ADD etc/supervisord.d/diamond.ini /etc/supervisord.d/diamond.ini
