@@ -13,7 +13,7 @@ else
 fi
 
 if [ "X${HTTPPORT}" == "X" ];then
-    HTTPPORT=80
+    HTTPPORT=9200
 fi
 
 sed -i -e "s/HTTP_PORT/${HTTPPORT}/" /var/www/kibana/config.js

@@ -74,3 +74,4 @@ ADD etc/syslog-ng/conf.d/logstash.conf /etc/syslog-ng/conf.d/logstash.conf
 ADD etc/diamond/handlers/InfluxdbHandler.conf /etc/diamond/handlers/InfluxdbHandler.conf
 ADD opt/qnib/bin/start_diamond.sh /opt/qnib/bin/start_diamond.sh
 ADD etc/supervisord.d/diamond.ini /etc/supervisord.d/diamond.ini
+ADD etc/supervisord.d/syslog-ng.ini /etc/supervisord.d/syslog-ng.ini

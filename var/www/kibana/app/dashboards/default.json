@@ -31,67 +31,17 @@
         },
         "1": {
           "type": "field",
-          "field": "program",
-          "query": "\"carbon-cache\"",
-          "mandate": "mustNot",
-          "active": true,
-          "alias": "",
-          "id": 1
-        },
-        "2": {
-          "type": "field",
           "field": "facility_label",
           "query": "\"kernel\"",
           "mandate": "mustNot",
           "active": true,
           "alias": "",
-          "id": 2
-        },
-        "3": {
-          "type": "field",
-          "field": "facility_label",
-          "query": "\"syslogd\"",
-          "mandate": "mustNot",
-          "active": true,
-          "alias": "",
-          "id": 3
-        },
-        "4": {
-          "type": "field",
-          "field": "_type",
-          "query": "\"nginx\"",
-          "mandate": "mustNot",
-          "active": true,
-          "alias": "",
-          "id": 4
-        },
-        "5": {
-          "type": "field",
-          "field": "program",
-          "query": "\"slurmd\"",
-          "mandate": "mustNot",
-          "active": true,
-          "alias": "",
-          "id": 5
-        },
-        "6": {
-          "type": "field",
-          "field": "program",
-          "query": "\"slurmctld\"",
-          "mandate": "mustNot",
-          "active": true,
-          "alias": "",
-          "id": 6
+          "id": 1
         }
       },
       "ids": [
         0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6
+        1
       ]
     }
   },
@@ -220,7 +170,8 @@
           "fields": [
             "@timestamp",
             "host",
-            "message"
+            "message",
+            "program"
           ],
           "localTime": true,
           "timeField": "@timestamp",
@@ -268,7 +219,7 @@
     },
     {
       "type": "filtering",
-      "collapse": true,
+      "collapse": false,
       "notice": true,
       "enable": true
     }
