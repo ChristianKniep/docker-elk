@@ -65,7 +65,6 @@ ADD root/bin/ /root/bin/
 ADD etc/default/logstash/ /etc/default/logstash/
 
 EXPOSE 5514
-EXPOSE 80
 
 ADD etc/supervisord.d/setup.ini /etc/supervisord.d/
 
