@@ -31,6 +31,8 @@ ADD etc/diamond/collectors/ElasticSearchCollector.conf /etc/diamond/collectors/E
 
 ## nginx
 RUN yum install -y nginx httpd-tools
+ADD etc/nginx/conf.d/diamond.conf /etc/nginx/conf.d/diamond.conf
+ADD etc/diamond/collectors/NginxCollector.conf /etc/diamond/collectors/NginxCollector.conf
 
 # Add QNIBInc repo
 RUN echo "20140913.1"; yum clean all
