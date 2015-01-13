@@ -76,3 +76,7 @@ ADD etc/diamond/handlers/InfluxdbHandler.conf /etc/diamond/handlers/InfluxdbHand
 ADD opt/qnib/bin/start_diamond.sh /opt/qnib/bin/start_diamond.sh
 ADD etc/supervisord.d/diamond.ini /etc/supervisord.d/diamond.ini
 ADD etc/supervisord.d/syslog-ng.ini /etc/supervisord.d/syslog-ng.ini
+
+ADD etc/pki/tls/certs/logstash-forwarder.crt /etc/pki/tls/certs/logstash-forwarder.crt
+ADD etc/pki/tls/private/logstash-forwarder.key /etc/pki/tls/private/logstash-forwarder.key
+ADD etc/logstash/conf.d/entry.conf /etc/logstash/conf.d/entry.conf
