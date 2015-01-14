@@ -91,4 +91,14 @@ cat << EOF >> ~/var/log/apache2/apache.log
 EOF
 ```
 
+### Known issues
 
+##### Time mismatch in rsyslog
+
+If you forward syslog from rsyslogd, you might encounter a mismatch between UTC and CET. To fix this use this configuration:
+
+```
+# Provide a propper timeformat to fix the UTC/CET mismatch
+$template forward_template,"<%PRI%>%TIMESTAMP:::date-rfc3339% %HOSTNAME% %syslogtag:1:32%%msg:::sp-if-no-1st-sp%%msg%"
+*.* @@127.0.0.1:5514;forward_template
+```
