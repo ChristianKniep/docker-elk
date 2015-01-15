@@ -59,10 +59,12 @@ ADD var/www/kibana/app/dashboards/ /var/www/kibana/app/dashboards/
 ADD var/www/kibana/config.js /var/www/kibana/config.js
 
 # logstash watchdog
+## I want the default config to be put if logstash/conf.d is empty
 ADD root/bin/start_logstash.sh /root/bin/start_logstash.sh
 ADD etc/supervisord.d/logstash_watchdog.ini /etc/supervisord.d/logstash_watchdog.ini
 ADD root/bin/ /root/bin/
 ADD etc/default/logstash/ /etc/default/logstash/
+ADD etc/logstash/conf.d/ /etc/logstash/conf.d/
 
 EXPOSE 5514
 
@@ -70,13 +72,4 @@ ADD etc/supervisord.d/setup.ini /etc/supervisord.d/
 
 ADD etc/consul.d/check_elasticsearch.json /etc/consul.d/check_elasticsearch.json
 ADD etc/nginx/nginx.conf /etc/nginx/nginx.conf
-ADD etc/syslog-ng/conf.d/logstash.conf /etc/syslog-ng/conf.d/logstash.conf
-# Should move to terminal
-ADD etc/diamond/handlers/InfluxdbHandler.conf /etc/diamond/handlers/InfluxdbHandler.conf
-ADD opt/qnib/bin/start_diamond.sh /opt/qnib/bin/start_diamond.sh
-ADD etc/supervisord.d/diamond.ini /etc/supervisord.d/diamond.ini
-ADD etc/supervisord.d/syslog-ng.ini /etc/supervisord.d/syslog-ng.ini
 
-ADD etc/pki/tls/certs/logstash-forwarder.crt /etc/pki/tls/certs/logstash-forwarder.crt
-ADD etc/pki/tls/private/logstash-forwarder.key /etc/pki/tls/private/logstash-forwarder.key
-ADD etc/logstash/conf.d/entry.conf /etc/logstash/conf.d/entry.conf
