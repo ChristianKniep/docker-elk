@@ -55,6 +55,7 @@ ADD var/www/kibana/config.js /var/www/kibana/config.js
 # logstash watchdog
 ADD root/bin/ /root/bin/
 ADD etc/default/logstash/ /etc/default/logstash/
+ADD etc/logstash/conf.d/ /etc/logstash/conf.d/
 
 ADD etc/consul.d/check_elasticsearch.json /etc/consul.d/check_elasticsearch.json
 ADD etc/nginx/nginx.conf /etc/nginx/nginx.conf
