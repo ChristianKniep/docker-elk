@@ -52,7 +52,7 @@ ADD var/www/kibana/config.js /var/www/kibana/config.js
 ADD root/bin/ /root/bin/
 ADD etc/default/logstash/ /etc/default/logstash/
 
-ADD etc/consul.d/check_elasticsearch.json /etc/consul.d/check_elasticsearch.json
+ADD etc/consul.d/ /etc/consul.d/
 ADD etc/syslog-ng/conf.d/logstash.conf /etc/syslog-ng/conf.d/logstash.conf
 # Should move to terminal
 ADD opt/qnib/bin/ /opt/qnib/bin/
