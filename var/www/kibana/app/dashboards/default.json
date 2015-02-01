@@ -28,20 +28,10 @@
           "active": true,
           "alias": "",
           "id": 0
-        },
-        "1": {
-          "type": "field",
-          "field": "facility_label",
-          "query": "\"kernel\"",
-          "mandate": "mustNot",
-          "active": true,
-          "alias": "",
-          "id": 1
         }
       },
       "ids": [
-        0,
-        1
+        0
       ]
     }
   },
@@ -168,10 +158,10 @@
           },
           "overflow": "min-height",
           "fields": [
-            "@timestamp",
-            "host",
-            "message",
-            "program"
+            "timestamp",
+            "logsource",
+            "program",
+            "message"
           ],
           "localTime": true,
           "timeField": "@timestamp",
@@ -220,7 +210,7 @@
     {
       "type": "filtering",
       "collapse": true,
-      "notice": false,
+      "notice": true,
       "enable": true
     }
   ],
