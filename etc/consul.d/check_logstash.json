@@ -1,7 +1,8 @@
 {
   "service": {
-    "name": "logstash-syslog",
+    "name": "syslog",
     "port": 5514,
+    "tags": ["logstash"],
     "check": {
       "script": "nmap 127.0.0.1 -PN -p 5514 | grep open",
       "interval": "10s"
