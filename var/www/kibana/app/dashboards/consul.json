@@ -1,5 +1,5 @@
 {
-  "title": "Logstash Search",
+  "title": "ConsulLogs",
   "services": {
     "query": {
       "list": {
@@ -22,16 +22,26 @@
         "0": {
           "type": "time",
           "field": "@timestamp",
-          "from": "now-15m",
+          "from": "now-5m",
           "to": "now",
           "mandate": "must",
           "active": true,
           "alias": "",
           "id": 0
+        },
+        "2": {
+          "type": "field",
+          "field": "program",
+          "query": "\"consul\"",
+          "mandate": "must",
+          "active": true,
+          "alias": "",
+          "id": 2
         }
       },
       "ids": [
-        0
+        0,
+        2
       ]
     }
   },
@@ -44,18 +54,7 @@
       "collapsable": true,
       "panels": [
         {
-          "error": false,
-          "span": 4,
-          "editable": true,
-          "type": "text",
-          "loadingEditor": false,
-          "mode": "markdown",
-          "content": "Besides this 'default' dashboards there are several others (expanded as needed):\n\n- [consul](/kibana/#/dashboard/file/consul.json) Logs about consul\n\n- [slurm*](/kibana/#/dashboard/file/slurm.json) Which filters slurmd|slurmctld\n- [ERROR](/kibana/#/dashboard/file/error.json) Filters errors (like OutOfMemory)",
-          "style": {},
-          "title": "Dashboards"
-        },
-        {
-          "span": 8,
+          "span": 12,
           "editable": true,
           "type": "histogram",
           "loadingEditor": false,
@@ -88,7 +87,7 @@
           },
           "auto_int": true,
           "resolution": 100,
-          "interval": "10s",
+          "interval": "1s",
           "intervals": [
             "auto",
             "1s",
@@ -158,7 +157,7 @@
           },
           "overflow": "min-height",
           "fields": [
-            "timestamp",
+            "@timestamp",
             "logsource",
             "program",
             "message"
@@ -210,7 +209,7 @@
     {
       "type": "filtering",
       "collapse": true,
-      "notice": true,
+      "notice": false,
       "enable": true
     }
   ],
