@@ -33,8 +33,7 @@ ADD etc/diamond/collectors/NginxCollector.conf /etc/diamond/collectors/NginxColl
 
 # Add QNIBInc repo
 # statsd
-RUN echo "20140917.1"; yum clean all; yum install -y qnib-statsd qnib-grok-patterns qnib-logstash-conf && \
-    chmod +x /usr/local/bin/start_statsd.sh
+RUN echo "20140917.1"; yum clean all; yum install -y qnib-statsd qnib-grok-patterns 
 
 ## Kibana
 WORKDIR /opt/
