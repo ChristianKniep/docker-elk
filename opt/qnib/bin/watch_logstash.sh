@@ -23,9 +23,9 @@ if [ $(find /etc/logstash/conf.d/ -name \*.conf|wc -l) -eq 0 ];then
     echo "cp /etc/default/logstash/*.conf /etc/logstash/conf.d/"
     cp /etc/default/logstash/[1-9]*.conf /etc/logstash/conf.d/
     if [ $(env|grep -c PORT_6379_TCP=) -ne 0 ];then
-        cp /etc/logstash/conf.d/00_redis_input.conf /etc/logstash/conf.d/
+        cp /etc/default/logstash/00_redis_input.conf /etc/logstash/conf.d/
     else
-        cp /etc/logstash/conf.d/00_entry.conf /etc/logstash/conf.d/
+        cp /etc/default/logstash/00_entry.conf /etc/logstash/conf.d/
     fi
 fi
 
