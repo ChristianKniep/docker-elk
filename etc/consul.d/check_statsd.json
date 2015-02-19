@@ -1,0 +1,10 @@
+{
+  "service": {
+    "name": "statsd",
+    "port": 8125,
+    "check": {
+      "script": "nmap 127.0.0.1 -Pn -sU -p 8125 | grep open",
+      "interval": "10s"
+    }
+  }
+}
