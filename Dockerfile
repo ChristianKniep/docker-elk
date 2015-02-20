@@ -53,7 +53,7 @@ ADD root/bin/ /root/bin/
 ADD etc/default/logstash/ /etc/default/logstash/
 
 ADD etc/consul.d/ /etc/consul.d/
-ADD etc/syslog-ng/conf.d/logstash.conf /etc/syslog-ng/conf.d/logstash.conf
+#
 # Should move to terminal
 ADD opt/qnib/bin/ /opt/qnib/bin/
 ADD etc/diamond/handlers/InfluxdbHandler.conf /etc/diamond/handlers/InfluxdbHandler.conf
