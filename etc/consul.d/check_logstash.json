@@ -4,7 +4,7 @@
     "port": 5514,
     "tags": ["logstash"],
     "check": {
-      "script": "nmap 127.0.0.1 -PN -p 5514 | grep open",
+      "script": "supervisorctl status logstash|grep RUNNING",
       "interval": "10s"
     }
   }
