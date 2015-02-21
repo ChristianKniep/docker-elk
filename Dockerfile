@@ -1,21 +1,9 @@
-###### LEK (Logstash/Elasticsearch/Kibana3)
-# A docker image that includes
-# - logstash (1.4)
-# - elasticsearch (1.0)
-# - kibana (3.0)
-# - StatsD (to fetch stuff from logstash)
-FROM qnib/terminal
+FROM qnib/logstash
 MAINTAINER "Christian Kniep <christian@qnib.org>"
 
-ADD etc/yum.repos.d/logstash-1.4.repo /etc/yum.repos.d/
 ADD etc/yum.repos.d/elasticsearch-1.2.repo /etc/yum.repos.d/
 RUN yum install -y which zeromq && \
     ln -s /usr/lib64/libzmq.so.1 /usr/lib64/libzmq.so
-
-# logstash
-RUN useradd jls && \
-    yum install -y logstash
-ADD etc/supervisord.d/logstash.ini /etc/supervisord.d/
 
 # elasticsearch
 RUN yum install -y elasticsearch && \
@@ -48,8 +36,7 @@ RUN mkdir -p /var/www; ln -s /opt/kibana-3.1.1 /var/www/kibana && \
 ADD var/www/kibana/app/dashboards/ /var/www/kibana/app/dashboards/
 ADD var/www/kibana/config.js /var/www/kibana/config.js
 
-# logstash watchdog
-ADD root/bin/ /root/bin/
+# logstash config
 ADD etc/default/logstash/ /etc/default/logstash/
 
 ADD etc/consul.d/ /etc/consul.d/

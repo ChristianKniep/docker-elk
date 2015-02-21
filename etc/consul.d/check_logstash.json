@@ -1,8 +1,0 @@
-{
-  "check": {
-    "id": "logstash",
-    "name": "Logstash Service",
-    "script": "supervisorctl status logstash|grep RUNNING",
-    "interval": "10s"
-  }
-}
