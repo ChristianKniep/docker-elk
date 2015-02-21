@@ -45,7 +45,3 @@ ADD etc/consul.d/ /etc/consul.d/
 ADD opt/qnib/bin/ /opt/qnib/bin/
 ADD etc/diamond/handlers/InfluxdbHandler.conf /etc/diamond/handlers/InfluxdbHandler.conf
 ADD etc/supervisord.d/ /etc/supervisord.d/
-
-# move up
-RUN rm -f /root/bin/* && \
-    ln -s /opt/qnib/bin/* /root/bin/
