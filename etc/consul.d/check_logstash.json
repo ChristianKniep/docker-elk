@@ -1,11 +1,8 @@
 {
-  "service": {
-    "name": "syslog",
-    "port": 5514,
-    "tags": ["logstash"],
-    "check": {
-      "script": "supervisorctl status logstash|grep RUNNING",
-      "interval": "10s"
-    }
+  "check": {
+    "id": "logstash",
+    "name": "Logstash Service",
+    "script": "supervisorctl status logstash|grep RUNNING",
+    "interval": "10s"
   }
 }
