@@ -1,8 +1,8 @@
 elk:
-  image: qnib/elk
+  image: qnib/elk:kibana4
   ports:
    - "9200:9200"
-   - "8080:80"
+   - "5601:5601"
   dns: 172.17.42.1
   hostname: elk
   links:
@@ -11,19 +11,15 @@ elk:
    - /var/lib/elasticsearch
   privileged: true
 
-influxdb:
-  image: qnib/influxdb
+kopf:
+  image: lmenezes/elasticsearch-kopf
   ports:
-   - "8083:8083"
-   - "8086:8086"
-   - "2003:2003"
-  dns: 172.17.42.1
-  hostname: influxdb
+  - 8088:80
   links:
-  - consul:consul
-  volumes: 
-   - /opt/influxdb/shared
-  privileged: true
+  - elk:elk
+  environment:
+  - KOPF_SERVER_NAME=dockerhost
+  - KOPF_ES_SERVERS=172.17.42.1:9200
 
 consul:
   image: qnib/consul
