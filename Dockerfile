@@ -1,7 +1,8 @@
 FROM qnib/logstash
 MAINTAINER "Christian Kniep <christian@qnib.org>"
 
-ADD etc/yum.repos.d/elasticsearch-1.2.repo /etc/yum.repos.d/
+# Update to kibana 4 requires elasticsearch 1.4.4 or later
+ADD etc/yum.repos.d/elasticsearch-1.4.repo /etc/yum.repos.d/
 RUN yum install -y which zeromq && \
     ln -s /usr/lib64/libzmq.so.1 /usr/lib64/libzmq.so
 
@@ -25,11 +26,13 @@ RUN echo "20140917.1"; yum clean all; yum install -y qnib-statsd qnib-grok-patte
 
 ## Kibana
 WORKDIR /opt/
-ADD kibana-3.1.1.tar.gz /opt/
+RUN curl -L -o kibana-4.0.1-linux-x64.tar.gz https://download.elasticsearch.org/kibana/kibana/kibana-4.0.1-linux-x64.tar.gz \
+    tar xf kibana-4.0.1-linux-x64.tar.gz /opt/ \
+  && rm /opt/kibana*.tar.gz
 WORKDIR /etc/nginx/conf.d
 ADD etc/nginx/conf.d/kibana.conf /etc/nginx/conf.d/kibana.conf
 WORKDIR /etc/nginx/
-RUN mkdir -p /var/www; ln -s /opt/kibana-3.1.1 /var/www/kibana && \
+RUN mkdir -p /var/www; ln -s /opt/kibana-4.0.1-linux-x64 /var/www/kibana && \
     if ! grep "daemon off" nginx.conf ;then sed -i '/worker_processes.*/a daemon off;' nginx.conf;fi
 
 # Config kibana-Dashboards
