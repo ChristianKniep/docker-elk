@@ -1,6 +1,6 @@
-[local_elasticsearch-1.2]
-name=Local elasticsearch repository for 1.2.x packages
-baseurl=http://172.17.42.1:81/repo/elasticsearch/1.2
+[local_elasticsearch-1.4]
+name=Local elasticsearch repository for 1.4.x packages
+baseurl=http://172.17.42.1:81/repo/elasticsearch/1.4
 skip_if_unavailable=true
 priority=1
 gpgcheck=0
