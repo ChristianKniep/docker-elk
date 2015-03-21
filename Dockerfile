@@ -1,7 +1,7 @@
-FROM qnib/logstash
+FROM qnib/logstash:1.3
 MAINTAINER "Christian Kniep <christian@qnib.org>"
 
-ADD etc/yum.repos.d/elasticsearch-1.2.repo /etc/yum.repos.d/
+ADD etc/yum.repos.d/elasticsearch-0.90.repo /etc/yum.repos.d/
 RUN yum install -y which zeromq && \
     ln -s /usr/lib64/libzmq.so.1 /usr/lib64/libzmq.so
 
