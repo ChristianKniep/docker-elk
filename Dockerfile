@@ -1,4 +1,4 @@
-FROM qnib/logstash
+FROM qnib/logstash:1.3
 MAINTAINER "Christian Kniep <christian@qnib.org>"
 
 RUN yum install -y which zeromq && \
