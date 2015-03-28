@@ -4,16 +4,6 @@ MAINTAINER "Christian Kniep <christian@qnib.org>"
 RUN yum install -y which zeromq && \
     ln -s /usr/lib64/libzmq.so.1 /usr/lib64/libzmq.so
 
-# elasticsearch
-#ADD etc/yum.repos.d/elasticsearch-1.4.repo /etc/yum.repos.d/
-#RUN yum install -y elasticsearch && \
-#    sed -i '/# cluster.name:.*/a cluster.name: logstash' /etc/elasticsearch/elasticsearch.yml
-## Makes no sense to be done while building
-#ADD etc/supervisord.d/elasticsearch.ini /etc/supervisord.d/elasticsearch.ini
-# diamond collector
-#ADD etc/diamond/collectors/ElasticSearchCollector.conf /etc/diamond/collectors/ElasticSearchCollector.conf 
-#ADD etc/consul.d/check_elasticsearch.json /etc/consul.d/
-
 ## nginx
 RUN yum install -y nginx httpd-tools
 ADD etc/nginx/ /etc/nginx/
