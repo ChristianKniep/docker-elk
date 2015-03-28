@@ -1,7 +1,7 @@
 FROM qnib/logstash
 MAINTAINER "Christian Kniep <christian@qnib.org>"
 
-ADD etc/yum.repos.d/elasticsearch-1.2.repo /etc/yum.repos.d/
+ADD etc/yum.repos.d/elasticsearch-1.4.repo /etc/yum.repos.d/
 RUN yum install -y which zeromq && \
     ln -s /usr/lib64/libzmq.so.1 /usr/lib64/libzmq.so
 
@@ -10,6 +10,7 @@ RUN yum install -y elasticsearch && \
     sed -i '/# cluster.name:.*/a cluster.name: logstash' /etc/elasticsearch/elasticsearch.yml
 ## Makes no sense to be done while building
 #RUN sed -i "/# node.name:.*/a node.name: $(hostname)" /etc/elasticsearch/elasticsearch.yml
+ADD etc/elasticsearch/elasticsearch.yml /etc/elasticsearch/
 ADD etc/supervisord.d/elasticsearch.ini /etc/supervisord.d/elasticsearch.ini
 # diamond collector
 ADD etc/diamond/collectors/ElasticSearchCollector.conf /etc/diamond/collectors/ElasticSearchCollector.conf 
