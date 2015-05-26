@@ -1,0 +1,23 @@
+{
+  "services": [
+    {
+        "id": "ls-syslog",
+        "name": "syslog",
+        "tags": ["logstash"],
+        "port": 5514,
+        "checks": [{
+            "script": "nmap 127.0.0.1 -PN -p 5514 | grep open",
+            "interval": "10s"
+        }]
+    },
+    {
+        "id": "logstash",
+        "name": "logstash",
+        "tags": ["zmq"],
+        "checks": [{
+            "script": "supervisorctl status logstash | grep RUNNING",
+            "interval": "10s"
+        }]
+    }
+  ]
+}
