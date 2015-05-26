@@ -1,7 +1,6 @@
 FROM qnib/logstash
 MAINTAINER "Christian Kniep <christian@qnib.org>"
 
-=======
 # Update to kibana 4 requires elasticsearch 1.4.4 or later
 ADD etc/yum.repos.d/elasticsearch-1.4.repo /etc/yum.repos.d/
 RUN yum install -y which zeromq && \
