@@ -32,6 +32,9 @@ ADD etc/consul.d/check_kibana.json /etc/consul.d/check_kibana.json
 # Config kibana
 ADD opt/kibana/config/kibana.yml /opt/kibana/config/kibana.yml
 
+# Add logstash check
+ADD etc/consul.d/check_logstash.json /etc/consul.d/check_logstash.json
+
 # logstash config
 ADD etc/default/logstash/ /etc/default/logstash/
 
