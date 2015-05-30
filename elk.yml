@@ -1,5 +1,5 @@
 elk:
-  image: qnib/elk:dev
+  image: qnib/elk
   ports:
    - "9200:9200"
    - "5514:5514"
