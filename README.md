@@ -3,6 +3,9 @@ docker-elk
 
 Dockerfile creating ELK services (Elasticsearch/Logstash/Kibana)
 
+It's available on [hub.docker.com](https://registry.hub.docker.com/u/qnib/elk/), just pull it:
+`docker pull qnib/elk`
+
 ## Parts
 
 It will
@@ -21,6 +24,7 @@ How to use kibana3 and kibana4 could be explored within this ['hello world' blog
 ### Within QNIBTerminal
 
 To get the most out of it a carbon container might be added, but this will impose the question whether to go even further and distribute all the services.
+
 
 
 ### Known issues
