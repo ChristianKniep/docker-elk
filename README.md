@@ -1,5 +1,6 @@
 docker-elk
 ==========
+[![](https://badge.imagelayers.io/qnib/elk:latest.svg)](https://imagelayers.io/?images=qnib/elk:latest 'Get your own badge on imagelayers.io')
 
 Dockerfile creating ELK services (Elasticsearch/Logstash/Kibana)
 
