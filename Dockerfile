@@ -3,7 +3,16 @@ MAINTAINER "Christian Kniep <christian@qnib.org>"
 
 ADD etc/yum.repos.d/elasticsearch-1.4.repo /etc/yum.repos.d/
 RUN yum install -y which zeromq && \
-    ln -s /usr/lib64/libzmq.so.1 /usr/lib64/libzmq.so
+    ln -s /usr/lib64/libzmq.so.1 /usr/lib64/libzmq.so && \
+    /opt/logstash/bin/plugin install \
+         logstash-filter-date \
+         logstash-filter-geoip \
+         logstash-filter-zeromq \
+         logstash-input-redis \
+         logstash-input-lumberjack \
+         logstash-output-redis \
+         logstash-output-statsd
+
 
 # elasticsearch
 RUN yum install -y elasticsearch && \
