@@ -1,0 +1,11 @@
+{
+  "service": {
+    "name": "nginx",
+    "port": 80,
+    "tags": ["kibana3"],
+    "check": {
+      "script": "nmap 127.0.0.1 -Pn -p 80 | grep open",
+      "interval": "10s"
+    }
+  }
+}

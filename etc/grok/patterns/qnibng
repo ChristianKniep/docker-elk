@@ -1,0 +1,2 @@
+# PerfMgr total sweep time 0.007380 sec
+QNG_SWEEP_TIME PerfMgr total sweep time %{BASE16FLOAT:sweep_time} sec

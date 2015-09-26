@@ -1,0 +1,8 @@
+[elasticsearch-1.7]
+name=Elasticsearch repository for 1.7.x packages
+baseurl=http://packages.elasticsearch.org/elasticsearch/1.7/centos
+skip_if_unavailable=true
+priority=2
+gpgcheck=1
+gpgkey=http://packages.elasticsearch.org/GPG-KEY-elasticsearch
+enabled=1

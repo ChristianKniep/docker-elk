@@ -1,0 +1,10 @@
+# carbon-cache
+SD_PROG (?:[\d\w\-]+)
+
+# fatal|error|sched
+SLURM_LEVEL (fatal|error|sched)
+
+# slurmctld: sched: Backfill scheduler plugin loaded
+# slurmctld: fatal: slurm_set_addr failure on compute0
+# slurmctld: error: Configured MailProg is invalid
+SCTLD_MSG slurmctld: %{SLURM_LEVEL:slurm_level}\: %{GREEDYDATA:sd_msg}

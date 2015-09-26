@@ -1,0 +1,6 @@
+elk:
+  extends:
+    file: elk.yml
+    service: elk
+  ports:
+   - "8500:8500"

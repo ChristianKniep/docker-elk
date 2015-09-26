@@ -1,0 +1,19 @@
+elk:
+  image: qnib/elk
+  ports:
+   - "9200:9200"
+   - "5514:5514"
+   - "5601:5601"
+   - "8080:80"
+   - "8500:8500"
+  environment:
+  - DC_NAME=dc1
+  - RUN_SERVER=true
+  - BOOTSTRAP_CONSUL=true
+  - COLLECT_METRICS=false
+  - FORWARD_TO_LOGSTASH=false
+  dns: 127.0.0.1
+  hostname: elk
+  volumes: 
+   - /var/lib/elasticsearch
+  privileged: true
