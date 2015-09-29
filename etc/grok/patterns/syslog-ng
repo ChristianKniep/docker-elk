@@ -1,0 +1,38 @@
+####### Log statistics
+#Log statistics; 
+# 	processed='destination(d_logmgmt)=103', 
+# 	dropped='dst.tcp(d_logmgmt#0,172.17.0.31:5514)=0', 
+# 	processed='dst.tcp(d_logmgmt#0,172.17.0.31:5514)=103', 
+# 	stored='dst.tcp(d_logmgmt#0,172.17.0.31:5514)=0', 
+# 	processed='src.internal(s_sys#2)=99', 
+# 	stamp='src.internal(s_sys#2)=1405579940', 
+# 	processed='center(received)=99', 
+# 	processed='center(queued)=103', 
+# 	processed='global(payload_reallocs)=194', 
+# 	processed='global(sdata_updates)=0', 
+# 	processed='global(msg_clones)=0', 
+# 	processed='source(s_sys)=99'
+# Log statistics; processed='destination(d_logmgmt)=103', ...
+SNG_LSTAT Log statistics; %{SNG_P_DST_LMGT}, %{GREEDYDATA:sd_msg}
+
+# processed='destination(d_logmgmt)=103'
+SNG_P_DST_LMGT processed='destination\(d_logmgmt\)=%{INT:sysng_proc_dst_d_lmgt}'
+SNG_P_DST_TCP processed='dst.tcp\(.*\)=%{INT:sysng_proc_dst_tcp}'
+SNG_P_SRC_INT processed='src.internal\(.*\)=%{INT:sysng_proc_src_int}'
+SNG_P_CENT_RCV processed='center\(received\)=%{INT:sysng_proc_center_rcv}'
+SNG_P_CENT_QUEUED processed='center\(queued\)=%{INT:sysng_proc_center_queued}'
+SNG_P_GLOB_PAY_REALLOC processed='global\(payload_reallocs\)=%{INT:sysng_proc_global_pat_realloc}'
+SNG_P_GLOB_SDAT_UPDATES processed='global\(sdata_updates\)=%{INT:sysng_proc_global_sdat_updates}'
+SNG_P_GLOB_MSG_CLONES processed='global\(msg_clones\)=%{INT:sysng_proc_global_msg_clones}'
+SNG_P_SRC_S_SYS processed='source\(s_sys\)=%{INT:sysng_proc_src_s_sys}'
+
+SNG_D_DST_TCP dropped='dst.tcp\(.*\)=%{INT:sysng_drop_dst_tcp}'
+SNG_S_DST_TCP stored='dst.tcp\(.*\)=%{INT:sysng_stored_dst_tcp}'
+SNG_T_SRC_INT stamp='src.internal\(s_sys#2\)=%{INT:sysng_stamp_src_int}'
+
+### groups
+SNG_GRP1 %{SNG_P_DST_LMGT}, %{SNG_D_DST_TCP}, %{SNG_P_DST_TCP}, %{SNG_S_DST_TCP}, %{SNG_P_SRC_INT}, %{SNG_T_SRC_INT}, %{SNG_P_CENT_RCV}
+SNG_GRP2 %{SNG_P_CENT_QUEUED}, %{SNG_P_GLOB_PAY_REALLOC}, %{SNG_P_GLOB_SDAT_UPDATES}, %{SNG_P_GLOB_MSG_CLONES}, %{SNG_P_SRC_S_SYS}
+SNG_GRP %{SNG_GRP1}, %{SNG_GRP2}
+####### \Log statistics
+

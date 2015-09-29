@@ -1,0 +1,1 @@
+GRAPHITE_METRIC [a-z0-9A-Z\[\]\(\)\*\.\,\-_]*

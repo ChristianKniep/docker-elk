@@ -1,0 +1,5 @@
+# BASICs
+INT (?:[+-]?(?:[0-9]+))
+
+# shards [5]/[1]
+ES_SHARDS shards \[%{INT:es_shards_exp}\]/\[%{INT:es_shards_got}\]
