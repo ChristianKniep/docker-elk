@@ -4,6 +4,8 @@ docker-elk
 
 Dockerfile creating ELK services (Elasticsearch/Logstash/Kibana)
 
+**Please use at least 2GB of RAM for this one...** See [#16](https://github.com/ChristianKniep/docker-elk/issues/16)
+
 It's available on [hub.docker.com](https://registry.hub.docker.com/u/qnib/elk/), just pull it:
 `docker pull qnib/elk`
 
